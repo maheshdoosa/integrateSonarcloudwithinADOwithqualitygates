@@ -1,5 +1,5 @@
 trigger:
-- master
+- main
 
 pool:
   vmImage: ubuntu-latest
@@ -17,9 +17,9 @@ jobs:
   - script: |
       sudo apt-get update
       sudo apt-get -y install curl jq
-      mvn verify package sonar:sonar -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.organization=azuredevopsdevsecopsoorg -Dsonar.projectKey=azuredevsecopsoprojectkey -Dsonar.token=d268968115b4935bcd007ff54f01906c18e33cb6
+      mvn verify package sonar:sonar -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.organization=mdazuredevsecopsorg -Dsonar.projectKey=mdazuredevsecopsprojectkey -Dsonar.token=eb1afc85af663925f7975f66e79d4c8db44c45cf
       sleep 5
-      quality_status=$(curl -s -u d268968115b4935bcd007ff54f01906c18e33cb6: https://sonarcloud.io/api/qualitygates/project_status?projectKey=azuredevsecopsoprojectkey | jq -r '.projectStatus.status')
+      quality_status=$(curl -s -u eb1afc85af663925f7975f66e79d4c8db44c45cf: https://sonarcloud.io/api/qualitygates/project_status?projectKey=mdazuredevsecopsprojectkey | jq -r '.projectStatus.status')
       echo "SonarCloud analysis status is $quality_status"; 
       if [[ $quality_status == "ERROR" ]] ; then exit 1;fi
     displayName: "Integrate SAST using SonarCloud to populate code coverage in Azure DevOps DevSecOps Pipeline"
